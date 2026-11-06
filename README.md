@@ -11,8 +11,8 @@ A self-contained, offline exploratory tool for comparing profiles of the **16 EP
 
 ## Run the app
 
-1. Extract the ZIP file (if you downloaded the ZIP).
-2. Double-click `PAH_Fingerprint_Lab.html` to open it in a current Chrome, Edge, Safari or Firefox browser. **No installation or Python required.**
+1. Open the live site above, or download/clone this repository (GitHub: **Code → Download ZIP**, then extract it).
+2. For offline use, double-click `index.html` to open it in a current Chrome, Edge, Safari or Firefox browser. **No installation or Python required.**
 3. Change Sample A and Sample B. Explore the `Relative %` and `Concentration` views; see `Σ16` bounds, four isomer ratios and PCA.
 4. Move the LOQ slider between 0 and 1. For visualization, censored analytes are represented by that fraction of their LOQ. **This fraction is an assumption, not a measurement.**
 5. Try the `Import CSV` button with `PAH_Fingerprint_Synthetic_Examples.csv`, or download the blank template from inside the app and enter your own values.
@@ -46,17 +46,17 @@ Optional columns: `site`, `notes`. You may include all optional fields; unrecogn
 
 ## Optional: learn Pydantic in action
 
-The browser app is **written in JavaScript, not Python**. The companion script `pydantic_csv_validator.py` demonstrates where Pydantic can help in a future Python workflow: validating the exact same CSV before doing any statistics.
+The browser app is **written in JavaScript, not Python**. The companion script `pydantic_csv_validator.py` demonstrates where Pydantic can help in a future Python workflow: validating the exact same CSV before doing any statistics. It applies the same rules as the app: units and sample types (case- and spacing-tolerant), value formats, required columns, duplicate `sample_id`s, 200 rows and 2 MB.
 
 With Python 3.10+ installed, run:
 
 ```bash
-python3 -m pip install "pydantic>=2,<3"
+python3 -m pip install -r requirements.txt
 python3 pydantic_csv_validator.py --demo-error
 python3 pydantic_csv_validator.py PAH_Fingerprint_Synthetic_Examples.csv
 ```
 
-The `--demo-error` example intentionally supplies an incorrect sample matrix/unit, a negative concentration and an unquantified `ND`, and Pydantic explains why they are invalid. You can inspect the `PAHSample`, `BelowLOQ`, and `Quantified` models in the script alongside your Python course.
+The `--demo-error` example intentionally supplies an incorrect sample matrix/unit, a negative concentration and an unquantified `ND`; Pydantic reports all three problems together and explains why they are invalid. You can inspect the `PAHSample`, `BelowLOQ`, and `Quantified` models in the script alongside your Python course.
 
 ## Scientific reading
 

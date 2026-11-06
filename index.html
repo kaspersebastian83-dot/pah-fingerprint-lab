@@ -93,7 +93,7 @@
       </div>
       <div class="split">
         <section class="card"><div class="eyebrow">07 / Composition detail</div><h2>All 16 analytes</h2><p class="section-desc" id="tableUnit">Original observations, normalized to a common wipe unit where applicable.</p><div class="table-wrap"><table class="analyte-table"><thead><tr><th>Compound</th><th>Code</th><th>Sample A</th><th>Sample B</th></tr></thead><tbody id="analyteBody"></tbody></table></div></section>
-        <section class="card"><div class="eyebrow">08 / Multisample exploration</div><h2>Principal component analysis</h2><p class="section-desc">A descriptive PCA of full, normalized 16-compound profiles in the same sample type as Sample A. Click a point to make it Sample B.</p><div class="pca-layout"><div id="pcaChart" aria-label="PCA plot"></div><div><div id="pcaLegend" class="pca-key"></div><p class="smallprint" id="pcaNote"></p></div></div><div id="pcaWarning" class="warning" hidden></div></section>
+        <section class="card"><div class="eyebrow">08 / Multisample exploration</div><h2>Principal component analysis</h2><p class="section-desc">A descriptive PCA of full, normalized 16-compound profiles in the same sample type as Sample A. Click any other point to make it Sample B.</p><div class="pca-layout"><div id="pcaChart" aria-label="PCA plot"></div><div><div id="pcaLegend" class="pca-key"></div><p class="smallprint" id="pcaNote"></p></div></div><div id="pcaWarning" class="warning" hidden></div></section>
       </div>
       <section class="card"><div class="eyebrow">09 / Scientific guardrails</div><h2>What this app can and cannot tell you</h2>
         <ul class="method-list">
@@ -300,13 +300,14 @@ function renderPCA(a){const warning=$('pcaWarning');warning.hidden=true;if(!a){$
   let svg='<svg viewBox="0 0 '+W+' '+H+'" class="pca-svg" role="img" aria-label="PCA scatterplot"><title>PCA of normalized full PAH profiles</title>';
   for(let i=0;i<=4;i++){const xx=L+i*(W-L-R)/4,yy=T+i*(H-T-B)/4;svg+=svgLine(xx,T,xx,H-B,'#edf2f3')+svgLine(L,yy,W-R,yy,'#edf2f3');}
   svg+=svgLine(L,H-B,W-R,H-B,'#a7b8bc')+svgLine(L,T,L,H-B,'#a7b8bc')+'<text x="'+((L+W-R)/2)+'" y="'+(H-11)+'" fill="#647c83" text-anchor="middle" font-size="12">PC 1 · '+fmt(data.variance1,1)+'% variance</text><text x="16" y="'+(T+(H-B-T)/2)+'" fill="#647c83" text-anchor="middle" transform="rotate(-90 16 '+(T+(H-B-T)/2)+')" font-size="12">PC 2 · '+fmt(data.variance2,1)+'%</text>';
-  data.result.forEach(point=>{const s=point.sample,selected=s.id===state.a||s.id===state.b;
-    svg+='<circle tabindex="0" role="button" aria-label="Select '+esc(s.id)+' as sample B" data-pca="'+esc(s.id)+'" cx="'+sx(point.x)+'" cy="'+sy(point.y)+'" r="'+(selected?8:6)+'" fill="'+colorFor(s.group)+'" stroke="'+(selected?'#162b36':'white')+'" stroke-width="'+(selected?2.3:1.5)+'" style="cursor:pointer"><title>'+esc(s.id+' · '+s.group)+' · select as Sample B</title></circle>';
+  data.result.forEach(point=>{const s=point.sample,isA=s.id===state.a,selected=isA||s.id===state.b;
+    const interactive=isA?'aria-label="'+esc(s.id)+' (current Sample A)"':'tabindex="0" role="button" aria-label="Select '+esc(s.id)+' as sample B" data-pca="'+esc(s.id)+'"';
+    svg+='<circle '+interactive+' cx="'+sx(point.x)+'" cy="'+sy(point.y)+'" r="'+(selected?8:6)+'" fill="'+colorFor(s.group)+'" stroke="'+(selected?'#162b36':'white')+'" stroke-width="'+(selected?2.3:1.5)+'" style="cursor:'+(isA?'default':'pointer')+'"><title>'+esc(s.id+' · '+s.group)+(isA?' · current Sample A':' · select as Sample B')+'</title></circle>';
     if(selected)svg+='<text x="'+(sx(point.x)+10)+'" y="'+(sy(point.y)-11)+'" font-size="11" fill="#293f48">'+esc(s.id)+'</text>';
   });svg+='</svg>';$('pcaChart').innerHTML=svg;
   $('pcaChart').querySelectorAll('[data-pca]').forEach(node=>{function select(){state.b=node.getAttribute('data-pca');render();}node.addEventListener('click',select);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});});
   $('pcaLegend').innerHTML=groups.map(g=>'<div class="key-row"><i class="key-color" style="background:'+colorFor(g)+'"></i><span>'+esc(g)+'</span></div>').join('');
-  $('pcaNote').textContent=subset.length+' full '+a.sample_type+' profiles · '+nMissing+' omitted (missing/zero sum). '+fmt(state.factor,1)+' × LOQ used. Click any dot to compare it against Sample A.';
+  $('pcaNote').textContent=subset.length+' full '+a.sample_type+' profiles · '+nMissing+' omitted (missing/zero sum). '+fmt(state.factor,1)+' × LOQ used. Click any other dot to compare it against Sample A.';
   const maxCens=subset.reduce((v,s)=>Math.max(v,sampleSummary(s).blq),0);if(maxCens>3){warning.hidden=false;warning.textContent='PCA may be highly sensitive to the chosen fraction of LOQ because some profiles have '+maxCens+' censored analytes.';}
 }
 function start(){freshDataset(demoRows(),'Synthetic demonstration');
