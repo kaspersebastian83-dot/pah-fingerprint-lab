@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>PAH Fingerprint Lab · Experimental analysis workspace</title>
+<style>
+:root{--bg:#f2f5f6;--paper:#fff;--ink:#162b36;--muted:#657987;--line:#dbe4e7;--teal:#167b78;--teal-pale:#e6f4f1;--orange:#df7b49;--orange-pale:#fff3e9;--red:#9e4039;--red-pale:#fff0ed;--blue:#5279b6;--shadow:0 3px 16px rgba(26,51,59,.045)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}h1,h2,h3,p{margin-top:0}h1{font-size:23px;line-height:1.15;letter-spacing:-.8px;margin-bottom:5px}h2{font-size:16px;letter-spacing:-.2px;margin-bottom:4px}h3{font-size:13px;margin-bottom:4px}p{color:var(--muted)}.app{min-height:100vh}.top{background:#16343d;color:#f4faf8;padding:20px max(20px,calc((100% - 1510px)/2));display:flex;gap:20px;align-items:center;justify-content:space-between}.brand{display:flex;gap:13px;align-items:center}.logo{width:45px;height:45px;display:grid;place-items:center;border:1px solid #5b8187;border-radius:12px;background:#234d53;color:#d8f3ec;font-size:24px;font-weight:700}.top h1{color:white}.top p{color:#bfd2d2;font-size:12px;margin:0}.tag{padding:6px 10px;border-radius:30px;border:1px solid #52737b;color:#e2efed;font-size:11px;text-align:center;white-space:nowrap}.layout{max-width:1510px;margin:auto;display:grid;grid-template-columns:290px minmax(0,1fr);gap:20px;padding:20px}.side,.main{min-width:0}.side{display:flex;flex-direction:column;gap:16px}.card{background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);padding:18px}.card-header{display:flex;gap:12px;justify-content:space-between;align-items:start;margin-bottom:14px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:750;color:var(--teal);margin-bottom:8px}.hint{font-size:12px;color:var(--muted)}.side .card h2{margin-bottom:9px}button.btn,.upload-label{display:inline-flex;gap:7px;align-items:center;justify-content:center;min-height:36px;padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:650;font-size:12px;text-decoration:none}button.btn:hover,.upload-label:hover{background:#edf5f3;border-color:#8bb9b3}button.primary,.upload-label.primary{background:var(--teal);color:white;border-color:var(--teal)}button.primary:hover,.upload-label.primary:hover{background:#0e6764}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #62c9bb;outline-offset:2px}.full{width:100%}.button-stack{display:grid;gap:8px}.info-line{display:flex;justify-content:space-between;gap:15px;font-size:12px;padding:7px 0;border-bottom:1px dashed var(--line)}.info-line:last-child{border-bottom:0}.info-line strong{font-weight:700}.small-label{color:var(--muted)}.privacy{background:#edf6f3;border-color:#cce4dc}.privacy p{font-size:12px;color:#3f615b;margin-bottom:0}.side details{font-size:12px;color:var(--muted)}details summary{cursor:pointer;color:var(--ink);font-weight:700}.side code,.format-code{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;background:#f1f4f5;border-radius:4px;padding:2px 4px}.main{display:flex;flex-direction:column;gap:16px}.notice{border:1px solid #efd6be;background:#fff8f0;border-radius:10px;padding:11px 14px;color:#855c32;font-size:12px}.notice.ok{background:#eaf7f2;border-color:#c1e7d7;color:#2c6c55}.notice.bad{background:#fff0ed;border-color:#ebc9c4;color:#933f39}.notice ul{margin:6px 0 0 19px;padding:0}.notice[hidden]{display:none}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{padding:15px 16px;background:#fff;border:1px solid var(--line);border-radius:12px}.metric small{display:block;text-transform:uppercase;letter-spacing:.8px;font-size:10px;color:var(--muted);font-weight:750}.metric strong{display:block;font-size:25px;letter-spacing:-1px;margin-top:3px;line-height:1.25}.metric .sub{font-size:11px;color:var(--muted);margin-top:6px}.selectors{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.selector-a{border-top:3px solid var(--teal)}.selector-b{border-top:3px solid var(--orange)}label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}.select{width:100%;border:1px solid var(--line);border-radius:8px;background:#fbfdfd;padding:9px 10px;color:var(--ink);min-width:0}.select:disabled{opacity:.6}.sample-details{font-size:11px;margin-top:9px;color:var(--muted);min-height:34px}.pill{display:inline-block;border-radius:4px;padding:1px 5px;background:#e9eef0;color:#506a75;font-size:10px;margin-right:4px}.panel-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.segment{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.segment button{border:0;border-right:1px solid var(--line);background:white;padding:7px 10px;font-size:12px;font-weight:650;color:var(--muted)}.segment button:last-child{border-right:0}.segment button.active{background:#e1f1ec;color:#126f68}.legend{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin:1px 0 10px}.legend span{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}.swatch{display:inline-block;width:20px;height:3px;border-radius:2px;background:var(--teal)}.swatch.orange{background:var(--orange)}.empty{display:flex;min-height:230px;align-items:center;justify-content:center;text-align:center;padding:30px;color:var(--muted);font-size:13px;background:#fbfcfd;border-radius:8px}.plot-frame{position:relative;width:100%;overflow:hidden}.plot-frame svg{width:100%;height:auto;display:block;min-height:230px}.plot-foot{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:9px;border-top:1px solid #edf1f2;padding-top:12px}.plot-foot .hint{max-width:720px}.warning{padding:10px 12px;border:1px solid #efdebe;background:#fff9ed;border-radius:9px;font-size:12px;color:#825f29;margin-top:9px}.warning.danger{background:#fff0ed;color:#994941;border-color:#e9c3c0}.warning[hidden]{display:none}.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.mini-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.mini-metric{border:1px solid #e3e9ec;background:#fbfcfd;border-radius:9px;padding:12px}.mini-metric .name{font-size:11px;color:var(--muted)}.mini-metric .value{font-weight:800;font-size:19px;margin:3px 0}.mini-metric .foot{font-size:10px;color:var(--muted)}.ratio-table,.analyte-table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}.ratio-table th,.analyte-table th{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:750}.ratio-table th,.ratio-table td,.analyte-table th,.analyte-table td{padding:10px 7px;border-bottom:1px solid #e9eef0;vertical-align:top}.ratio-table td:nth-child(n+2),.ratio-table th:nth-child(n+2){text-align:right}.ratio-table tr:last-child td,.analyte-table tr:last-child td{border-bottom:0}.ratio-val{font-weight:750;font-variant-numeric:tabular-nums}.ratio-sub{display:block;font-size:10px;color:#8c7a5d}.table-wrap{overflow:auto}.analyte-table td:nth-child(n+3),.analyte-table th:nth-child(n+3){text-align:right;white-space:nowrap}.analyte-table td:nth-child(2){color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#bbb;margin-right:4px}.pca-layout{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:18px}.pca-svg{width:100%;height:auto;display:block;background:#fcfdfd;border-radius:8px}.pca-key{font-size:11px}.key-row{display:flex;gap:8px;align-items:start;margin:0 0 10px}.key-color{width:9px;height:9px;margin-top:4px;border-radius:50%;flex-shrink:0}.section-desc{font-size:12px;color:var(--muted);margin-bottom:13px}.control-row{display:flex;gap:13px;align-items:center;flex-wrap:wrap}.range-wrap{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px}.range-wrap input{accent-color:var(--teal);width:145px}.range-value{font-weight:750;color:var(--ink);min-width:24px}.smallprint{font-size:11px;line-height:1.6;color:var(--muted)}.method-list{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:12px}.method-list li{margin-bottom:6px}.footer{font-size:11px;color:var(--muted);padding:3px 0 20px}.muted{color:var(--muted)}.test-target{display:none}
+@media(max-width:1050px){.layout{grid-template-columns:250px minmax(0,1fr);gap:12px;padding:12px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}.pca-layout{grid-template-columns:1fr 200px}}
+@media(max-width:740px){.top{padding:16px}.layout{display:block;padding:11px}.side{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.side .card{padding:14px}.selectors{grid-template-columns:1fr}.tag{display:none}.card{padding:14px}.pca-layout{grid-template-columns:1fr}.pca-key{display:flex;flex-wrap:wrap;gap:8px}.key-row{max-width:46%}h1{font-size:19px}}
+@media(max-width:480px){.side{grid-template-columns:1fr}.metrics{gap:7px}.metric{padding:11px}.metric strong{font-size:20px}.top{padding:13px}.brand{gap:9px}.logo{width:38px;height:38px}.panel-controls{width:100%}.range-wrap input{width:110px}.ratio-table th,.ratio-table td{padding:8px 4px}}
+@media print{body{background:white;color:black;font-size:11px}.top{background:white;color:black;border-bottom:2px solid black;padding:0 0 15px}.top h1{color:black}.top p{color:#444}.logo,.tag,.side,.no-print,button,.control-row{display:none!important}.layout{display:block;padding:12px 0}.card,.metric{box-shadow:none;break-inside:avoid;border-color:#aaa}.main{gap:12px}.metrics{grid-template-columns:repeat(4,1fr)}.split{grid-template-columns:1fr 1fr}.pca-layout{grid-template-columns:1fr 200px}#notice{display:none!important}a{color:black}.plot-frame svg{min-height:0}.footer{padding-bottom:0}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="logo" aria-hidden="true">∑</div><div><h1>PAH Fingerprint Lab</h1><p>A local, exploratory workspace for 16 EPA PAH profiles</p></div></div>
+    <div class="tag">OFFLINE · DEMO / RESEARCH · v0.1</div>
+  </header>
+  <div class="layout">
+    <aside class="side">
+      <section class="card">
+        <div class="eyebrow">01 / Data workspace</div>
+        <h2>Bring your samples</h2>
+        <p class="hint">Start with synthetic examples or import a CSV with one row per sample.</p>
+        <div class="button-stack">
+          <label class="upload-label primary full no-print" for="csvFile">↑ &nbsp; Import CSV file</label>
+          <input id="csvFile" type="file" accept=".csv,text/csv,text/plain" hidden>
+          <button id="demoBtn" class="btn full no-print" type="button">↻ &nbsp; Restore synthetic demo</button>
+          <button id="exampleBtn" class="btn full no-print" type="button">↓ &nbsp; Download demo CSV</button>
+          <button id="templateBtn" class="btn full no-print" type="button">↓ &nbsp; Download blank template</button>
+        </div>
+        <div class="info-line" style="margin-top:12px"><span class="small-label">Dataset</span><strong id="datasetName">Synthetic demonstration</strong></div>
+        <div class="info-line"><span class="small-label">Samples</span><strong id="datasetCount">—</strong></div>
+      </section>
+      <section class="card">
+        <div class="eyebrow">02 / Explore sensitivity</div>
+        <h2>Below quantification limit</h2>
+        <p class="hint">For exploratory profiles only, display each <strong>&lt;LOQ</strong> observation as a fraction of its reported LOQ.</p>
+        <div class="range-wrap"><span>0</span><input type="range" id="loqSlider" min="0" max="100" step="10" value="50" aria-label="Fraction of LOQ for exploratory charts"><span>1×</span></div>
+        <div class="info-line"><span class="small-label">Current visualization</span><strong id="loqValue">0.5 × LOQ</strong></div>
+        <p class="smallprint" style="margin:8px 0 0">This is <strong>not</strong> a measured concentration. Diagnostic ratio intervals use bounds instead; substitution can bias statistics.</p>
+      </section>
+      <section class="card privacy">
+        <div class="eyebrow">03 / Private by design</div>
+        <h2>Runs entirely on your computer</h2>
+        <p>No account, server, dependencies or internet requests. Imported CSV stays in memory until the page closes or you load a new dataset. Avoid uploading confidential case data to public repositories.</p>
+      </section>
+      <section class="card">
+        <h2>CSV rules</h2>
+        <p class="hint">Required metadata: <code>sample_id</code>, <code>group</code>, <code>sample_type</code>, <code>unit</code> and the 16 analyte columns.</p>
+        <details><summary>Accepted value formats</summary><p class="smallprint" style="margin-top:8px"><code>4.5</code> = quantified; <code>&lt;0.5</code> = below LOQ of 0.5; blank = missing, not zero. Semicolon CSV with decimal commas also works (e.g. <code>&lt;0,5</code>). Use wipe / material and units <code>µg/m²</code>, <code>µg/100cm²</code>, or <code>mg/kg TM</code> (DM accepted). For wipes, 1 µg/100 cm² = 100 µg/m².</p></details>
+        <div class="info-line"><span class="small-label">Limits</span><strong>200 rows · 2 MB</strong></div>
+      </section>
+    </aside>
+    <main class="main">
+      <div id="notice" class="notice ok" role="status" aria-live="polite">Loaded synthetic data. These patterns are invented for demonstrating the analysis workflow, not calibrated reference fingerprints.</div>
+      <section class="metrics" aria-label="Dataset summary">
+        <div class="metric"><small>Samples loaded</small><strong id="mSamples">—</strong><div class="sub" id="mGroups">—</div></div>
+        <div class="metric"><small>Quantified results</small><strong id="mMeasured">—</strong><div class="sub">Across the EPA-16 panel</div></div>
+        <div class="metric"><small>Below LOQ</small><strong id="mCensored">—</strong><div class="sub" id="mCensoredSub">—</div></div>
+        <div class="metric"><small>Missing values</small><strong id="mMissing">—</strong><div class="sub">Excluded from full-profile methods</div></div>
+      </section>
+      <section class="selectors" aria-label="Sample comparison selectors">
+        <div class="card selector-a"><div class="eyebrow">Sample A · Teal</div><label for="sampleA">Reference profile</label><select class="select" id="sampleA"></select><div class="sample-details" id="detailsA"></div></div>
+        <div class="card selector-b"><div class="eyebrow" style="color:var(--orange)">Sample B · Orange</div><label for="sampleB">Compare against</label><select class="select" id="sampleB"></select><div class="sample-details" id="detailsB"></div></div>
+      </section>
+      <section class="card">
+        <div class="card-header"><div><div class="eyebrow">04 / Compare profiles</div><h2>PAH fingerprints</h2><p class="section-desc">The same 16 compounds, viewed as relative composition or absolute concentration.</p></div><div class="panel-controls no-print"><div class="segment" role="group" aria-label="Chart mode"><button id="modeRelative" class="active" type="button">Relative %</button><button id="modeAbsolute" type="button">Concentration</button></div></div></div>
+        <div class="legend"><span><i class="swatch"></i><strong id="legendA">A</strong></span><span><i class="swatch orange"></i><strong id="legendB">B</strong></span><span>○ indicates censored observation</span></div>
+        <div id="compareWarning" class="warning" hidden></div>
+        <div class="plot-frame" id="profileChart" aria-label="Comparison chart"></div>
+        <div class="plot-foot"><div class="hint" id="plotHint">—</div><button class="btn no-print" id="printBtn" type="button">Print / Save PDF</button></div>
+      </section>
+      <div class="split">
+        <section class="card">
+          <div class="eyebrow">05 / Summary</div><h2>What the numbers say</h2><p class="section-desc">Σ16 bounds and a descriptive shape-similarity calculation.</p>
+          <div class="mini-metrics">
+            <div class="mini-metric"><div class="name">Σ16 · Sample A</div><div class="value" id="sumA">—</div><div class="foot" id="sumAFoot">—</div></div>
+            <div class="mini-metric"><div class="name">Σ16 · Sample B</div><div class="value" id="sumB">—</div><div class="foot" id="sumBFoot">—</div></div>
+            <div class="mini-metric"><div class="name">Cosine similarity</div><div class="value" id="simValue">—</div><div class="foot">Normalized profiles · 0–1 (descriptive)</div></div>
+            <div class="mini-metric"><div class="name">Comparable?</div><div class="value" id="compValue">—</div><div class="foot" id="compFoot">—</div></div>
+          </div>
+          <p class="smallprint" id="sumNote" style="margin:12px 0 0">—</p>
+        </section>
+        <section class="card"><div class="eyebrow">06 / Diagnostic ratios</div><h2>Isomer ratios</h2><p class="section-desc">Intervals incorporate &lt;LOQ limits. No source-type thresholds or verdicts are applied.</p>
+          <div class="table-wrap"><table class="ratio-table"><thead><tr><th>Ratio</th><th>Sample A</th><th>Sample B</th></tr></thead><tbody id="ratioBody"></tbody></table></div>
+          <p class="smallprint" style="margin-top:10px">With censored results, ratio bounds are mathematical limits assuming values from 0 to LOQ. They do not represent measurement uncertainty.</p>
+        </section>
+      </div>
+      <div class="split">
+        <section class="card"><div class="eyebrow">07 / Composition detail</div><h2>All 16 analytes</h2><p class="section-desc" id="tableUnit">Original observations, normalized to a common wipe unit where applicable.</p><div class="table-wrap"><table class="analyte-table"><thead><tr><th>Compound</th><th>Code</th><th>Sample A</th><th>Sample B</th></tr></thead><tbody id="analyteBody"></tbody></table></div></section>
+        <section class="card"><div class="eyebrow">08 / Multisample exploration</div><h2>Principal component analysis</h2><p class="section-desc">A descriptive PCA of full, normalized 16-compound profiles in the same sample type as Sample A. Click a point to make it Sample B.</p><div class="pca-layout"><div id="pcaChart" aria-label="PCA plot"></div><div><div id="pcaLegend" class="pca-key"></div><p class="smallprint" id="pcaNote"></p></div></div><div id="pcaWarning" class="warning" hidden></div></section>
+      </div>
+      <section class="card"><div class="eyebrow">09 / Scientific guardrails</div><h2>What this app can and cannot tell you</h2>
+        <ul class="method-list">
+          <li><strong>No automatic source attribution.</strong> Even visually close profiles and diagnostic ratios cannot by themselves establish whether material came from wood, plastic, traffic or cooking.</li>
+          <li><strong>Matrix matters.</strong> Wipe loading (µg/m²) and bulk material content (mg/kg dry matter) are not comparable. Wipe-area units are converted mathematically, but sampling procedures, substrates and surface conditions still matter.</li>
+          <li><strong>Censored ≠ zero.</strong> An entry such as <code>&lt;0.5</code> means the value lies below the specified quantification limit, not that the concentration is zero. The slider is only an exploratory sensitivity check. A complete dataset is required for similarity and PCA.</li>
+          <li><strong>Σ16 ranges.</strong> The displayed interval adds quantified values and 0–LOQ for censored compounds. Missing analytes mean the full Σ16 upper bound is unknown. Analytical uncertainty is not included.</li>
+          <li><strong>PCA is exploratory.</strong> It is computed on linear normalized fractions, not log-ratio transformed compositions; shape and group separation can change with treatment of censored observations and sampling design. Do not interpret distances as independent proof of causation.</li>
+          <li><strong>Validation.</strong> The CSV reader validates structure and numerical input but cannot verify whether a value was copied correctly from an original lab report.</li>
+        </ul>
+        <p class="smallprint" style="margin:12px 0 0">Reading: <a href="https://www.umweltprobenbank.de/en/documents/13446" target="_blank" rel="noopener">German Environmental Specimen Bank · EPA-16 list</a> · <a href="https://www.epa.gov/n-steps-online/data-considerations" target="_blank" rel="noopener">US EPA · censored data</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/22243855/" target="_blank" rel="noopener">Tobiszewski &amp; Namieśnik (2012) · PAH diagnostic ratios</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/21859122/" target="_blank" rel="noopener">Katsoyiannis et al. (2011) · critical evaluation</a></p>
+      </section>
+      <div class="footer">PAH Fingerprint Lab v0.1 · Self-contained JavaScript/HTML · Synthetic data included · For education and exploratory research, not forensic findings or remediation decisions.</div>
+    </main>
+  </div>
+</div>
+<script>
+'use strict';
+(function () {
+const PAHS=[
+  ['NAP','Naphthalene',2],['ACY','Acenaphthylene',3],['ACE','Acenaphthene',3],['FLU','Fluorene',3],
+  ['PHE','Phenanthrene',3],['ANT','Anthracene',3],['FLT','Fluoranthene',4],['PYR','Pyrene',4],
+  ['BAA','Benzo[a]anthracene',4],['CHR','Chrysene',4],['BBF','Benzo[b]fluoranthene',5],
+  ['BKF','Benzo[k]fluoranthene',5],['BAP','Benzo[a]pyrene',5],['DBA','Dibenzo[a,h]anthracene',5],
+  ['ICP','Indeno[1,2,3-cd]pyrene',6],['BGP','Benzo[ghi]perylene',6]
+];
+const KEYS=PAHS.map(a=>a[0]);
+const RATIOS=[['ANT/(ANT+PHE)','ANT','PHE'],['FLT/(FLT+PYR)','FLT','PYR'],['BAA/(BAA+CHR)','BAA','CHR'],['ICP/(ICP+BGP)','ICP','BGP']];
+const COLORS=['#167b78','#df7b49','#5279b6','#a278ad','#9d8d38','#4c899c','#bd6374','#65758d'];
+const $=id=>document.getElementById(id);
+const fmt=(v,d=2)=>Number.isFinite(v)?v.toLocaleString('en-GB',{maximumFractionDigits:d,minimumFractionDigits:0}):'—';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const state={rows:[],name:'Synthetic demonstration',a:null,b:null,factor:.5,mode:'relative'};
+function canonicalUnit(unit){const s=String(unit||'').trim().toLowerCase().replace(/μ/g,'µ').replace(/²/g,'2').replace(/\s+/g,'').replace(/\u00b2/g,'2');
+  if(['µg/m2','ug/m2','mcg/m2'].includes(s))return {unit:'µg/m²',factor:1,kind:'wipe'};
+  if(['µg/100cm2','ug/100cm2','mcg/100cm2'].includes(s))return {unit:'µg/m²',factor:100,kind:'wipe'};
+  if(['mg/kgtm','mg/kgdm','mg/kgdry','mg/kgdrymatter','mg/kgts'].includes(s))return {unit:'mg/kg TM',factor:1,kind:'material'};
+  return null;
+}
+function parseValue(s){const str=String(s??'').trim();if(str==='')return {kind:'missing'};
+  const under=/^<\s*([+]?(?:\d+(?:[.,]\d+)?|[.,]\d+))$/.exec(str);
+  if(under){const lim=Number(under[1].replace(',','.'));if(!Number.isFinite(lim)||lim<=0)throw Error('a <LOQ value must have a positive, finite limit');return {kind:'censored',loq:lim};}
+  if(/^(nd|n\.d\.|n\.d|nq|bg|<bg|<loq|na|n\/a|-|--|not detected)$/i.test(str))throw Error('non-quantified entries must have an explicit limit such as <0.5 (or be blank if truly missing)');
+  if(!/^[+]?(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(str))throw Error('must be a nonnegative number or <LOQ, e.g. <0.5');
+  const n=Number(str.replace(',','.'));if(!Number.isFinite(n)||n<0)throw Error('must be finite and nonnegative');
+  return {kind:'measured',value:n};
+}
+function normalizeSample(row){const unitInfo=canonicalUnit(row.unit);if(!unitInfo)throw Error('unrecognized unit: '+row.unit);
+  if(!['wipe','material'].includes(row.sample_type))throw Error('sample_type must be wipe or material');
+  if(row.sample_type!==unitInfo.kind)throw Error('sample_type is incompatible with unit '+row.unit);
+  const vals={};for(const k of KEYS){const v=parseValue(row[k]);vals[k]=v.kind==='measured'?{kind:v.kind,value:v.value*unitInfo.factor}:v.kind==='censored'?{kind:v.kind,loq:v.loq*unitInfo.factor}:v;}
+  return {id:String(row.sample_id).trim(),group:String(row.group||'Unassigned').trim()||'Unassigned',sample_type:row.sample_type,unit:unitInfo.unit,originalUnit:row.unit,vals,notes:String(row.notes||''),site:String(row.site||''),raw:row};
+}
+function delimitedParse(text){const firstLine=text.replace(/^\uFEFF/,'').split(/\r?\n/).find(x=>x.trim())||'';let comma=0,semi=0,inQ=false;
+  for(let i=0;i<firstLine.length;i++){let c=firstLine[i];if(c==='"'){if(inQ&&firstLine[i+1]==='"')i++;else inQ=!inQ;}else if(!inQ){if(c===',')comma++;if(c===';')semi++;}}
+  const delim=semi>comma?';':',';const out=[];let r=[],v='',quoted=false;const input=text.replace(/^\uFEFF/,'');
+  for(let i=0;i<input.length;i++){const c=input[i];if(c==='"'){if(quoted&&input[i+1]==='"'){v+='"';i++;}else quoted=!quoted;}
+    else if(c===delim&&!quoted){r.push(v);v='';}
+    else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&input[i+1]==='\n')i++;r.push(v);if(r.some(x=>x.trim()!==''))out.push(r);r=[];v='';}
+    else v+=c;
+  }
+  if(quoted)throw Error('CSV contains an unmatched quotation mark');r.push(v);if(r.some(x=>x.trim()!==''))out.push(r);return out;
+}
+function parseCSV(text){const cells=delimitedParse(text);if(cells.length<2)throw Error('CSV must contain a header and at least one sample row');
+  const head=cells[0].map(x=>x.trim().toLowerCase());const required=['sample_id','group','sample_type','unit',...KEYS.map(k=>k.toLowerCase())];
+  const missing=required.filter(k=>!head.includes(k));if(missing.length)throw Error('Missing columns: '+missing.join(', '));
+  if(new Set(head).size!==head.length)throw Error('Duplicate column names');
+  if(cells.length>201)throw Error('The demo app accepts at most 200 sample rows');
+  const valid=[],errors=[],ids=new Set();
+  for(let i=1;i<cells.length;i++){
+    try{const c=cells[i];if(c.length!==head.length)throw Error('expected '+head.length+' cells, got '+c.length+' (check delimiter and quoting)');
+      const raw={};head.forEach((key,j)=>raw[key]=c[j].trim());raw.sample_id=raw.sample_id.trim();
+      if(!raw.sample_id||raw.sample_id.length>80)throw Error('sample_id must contain 1–80 characters');
+      if(ids.has(raw.sample_id))throw Error('duplicate sample_id '+raw.sample_id);
+      raw.sample_type=raw.sample_type.toLowerCase();
+      for(const k of KEYS)raw[k]=raw[k.toLowerCase()];
+      const sample=normalizeSample(raw);valid.push(sample);ids.add(raw.sample_id);
+    }catch(e){errors.push('Row '+(i+1)+': '+e.message);}
+  }
+  return {valid,errors,total:cells.length-1};
+}
+function sampleValue(sample,k){const v=sample.vals[k];if(v.kind==='measured')return v.value;if(v.kind==='censored')return state.factor*v.loq;return null;}
+function sampleSummary(sample){let low=0,high=0,det=0,blq=0,miss=0;for(const k of KEYS){const v=sample.vals[k];if(v.kind==='measured'){low+=v.value;high+=v.value;det++;}else if(v.kind==='censored'){high+=v.loq;blq++;}else miss++;}
+  return {low,high,det,blq,miss,center:low+state.factor*(high-low),complete:miss===0};}
+function normalized(sample){if(!sample)return null;const sum=sampleSummary(sample);if(!sum.complete||sum.center<=0)return null;
+  return KEYS.map(k=>sampleValue(sample,k)/sum.center);
+}
+function compatible(a,b){return !!a&&!!b&&a.sample_type===b.sample_type&&a.unit===b.unit;}
+function vecDot(a,b){return a.reduce((t,v,i)=>t+v*b[i],0);}
+function cosine(a,b){if(!a||!b)return null;const d=Math.sqrt(vecDot(a,a)*vecDot(b,b));return d>0?vecDot(a,b)/d:null;}
+function ratioBounds(sample,a,b){if(!sample)return null;const v=sample.vals[a],w=sample.vals[b];if(v.kind==='missing'||w.kind==='missing')return null;
+  const amin=v.kind==='measured'?v.value:0,amax=v.kind==='measured'?v.value:v.loq;
+  const bmin=w.kind==='measured'?w.value:0,bmax=w.kind==='measured'?w.value:w.loq;
+  if(amax+bmax<=0)return null;
+  const low=(amin+bmax)>0?amin/(amin+bmax):0;
+  const high=(amax+bmin)>0?amax/(amax+bmin):1;
+  return {low,high,censored:v.kind==='censored'||w.kind==='censored'};
+}
+function showNotice(message,type='ok',errors=[]){const el=$('notice');el.className='notice '+type;el.hidden=false;el.innerHTML=esc(message)+(errors.length?'<ul>'+errors.slice(0,8).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'')+(errors.length>8?'<div>… and '+(errors.length-8)+' more errors.</div>':'');}
+function getA(){return state.rows.find(s=>s.id===state.a)||null;}
+function getB(){return state.rows.find(s=>s.id===state.b)||null;}
+function freshDataset(rows,name){state.rows=rows;state.name=name;state.a=rows[0]?.id||null;state.b=rows.find(r=>r.id!==state.a&&r.sample_type===rows[0]?.sample_type)?.id||rows[1]?.id||state.a;render();}
+function demoRows(){const archetypes=[
+ {prefix:'WOOD',group:'A · Wood-rich fire (synthetic)',type:'wipe',base:[9,3,4,5,18,3,13,12,6,8,7,4,2,1,3,4],factor:1.0},
+ {prefix:'COOK',group:'B · Cooking aerosol (synthetic)',type:'wipe',base:[4,1.5,2,3,15,2,22,18,4,9,4,3,1.5,.8,2.5,2.3],factor:1.1},
+ {prefix:'VEH',group:'C · Vehicle deposit (synthetic)',type:'wipe',base:[6,1.8,2,4,9,2,12,9,11,10,16,9,8,3,8,11],factor:.75},
+ {prefix:'MIX',group:'D · Mixed fire (synthetic)',type:'wipe',base:[6,1.1,3.2,5,12,1.4,13,12,10,10,10,5,5,3,9,9],factor:1.4},
+ {prefix:'BULK',group:'E · Material (synthetic)',type:'material',base:[1,1,1,2,8,1,15,12,5,6,12,9,9,4,10,8],factor:.22}
+ ];const ret=[];
+ for(const grp of archetypes)for(let j=0;j<(grp.type==='wipe'?3:3);j++){
+    const is100=grp.type==='wipe'&&j===1;const raw={sample_id:grp.prefix+'-'+String(j+1).padStart(2,'0'),group:grp.group,sample_type:grp.type,unit:grp.type==='material'?'mg/kg TM':is100?'µg/100cm²':'µg/m²',site:'Synthetic workspace',notes:'Fictional values, not published reference measurements'};
+    KEYS.forEach((k,i)=>{let x=grp.base[i]*grp.factor*(1+.16*Math.sin((j+1)*2.2+i*.89)+.07*Math.cos(i+j*3));x=Math.max(.01,x);if(is100)x/=100;
+      const limit=grp.type==='material'?.45:(is100?.025:2.5);raw[k]=x<limit?'<'+fmtNumber(limit):fmtNumber(x);
+    });
+    ret.push(normalizeSample(raw));
+ }
+ return ret;
+}
+function fmtNumber(n){return (Math.round(n*10000)/10000).toString();}
+function csvEscape(value,sep=','){const s=String(value??'');return /[",\r\n]/.test(s)||s.includes(sep)?'"'+s.replace(/"/g,'""')+'"':s;}
+const cols=['sample_id','group','sample_type','unit','site','notes',...KEYS];
+function csvRows(rows){return [cols.join(','),...rows.map(r=>cols.map(k=>csvEscape(r[k]??'')).join(','))].join('\r\n');}
+function download(name,data,type='text/csv;charset=utf-8'){const blob=new Blob(['\uFEFF',data],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+function render(){
+ $('datasetName').textContent=state.name;$('datasetCount').textContent=state.rows.length;
+ const vals=state.rows.flatMap(r=>KEYS.map(k=>r.vals[k]));const m=vals.filter(v=>v.kind==='measured').length,c=vals.filter(v=>v.kind==='censored').length,missing=vals.filter(v=>v.kind==='missing').length;
+ $('mSamples').textContent=state.rows.length;$('mGroups').textContent=new Set(state.rows.map(r=>r.group)).size+' labelled groups';
+ $('mMeasured').textContent=m;$('mCensored').textContent=c;$('mCensoredSub').textContent=vals.length?fmt(100*c/vals.length,1)+'% of reported panel':'';$('mMissing').textContent=missing;
+ $('loqValue').textContent=fmt(state.factor,1)+' × LOQ';$('loqSlider').value=String(state.factor*100);
+ for(const key of ['A','B']){const select=$('sample'+key),old=key==='A'?state.a:state.b;select.innerHTML=state.rows.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.id+' — '+s.group.replace(' (synthetic)',''))+'</option>').join('');select.value=old??'';}
+ $('modeRelative').classList.toggle('active',state.mode==='relative');$('modeAbsolute').classList.toggle('active',state.mode==='absolute');
+ const a=getA(),b=getB();
+ for(const [k,s] of [['A',a],['B',b]]){$('details'+k).innerHTML=s?'<span class="pill">'+esc(s.sample_type)+'</span><span class="pill">'+esc(s.originalUnit)+'</span>'+esc(s.notes?s.notes.slice(0,85):s.site):'No sample selected';}
+ $('legendA').textContent=a?a.id:'A';$('legendB').textContent=b?b.id:'B';
+ renderComparison(a,b);renderSummary(a,b);renderRatios(a,b);renderTable(a,b);renderPCA(a);
+}
+function svgLine(x1,y1,x2,y2,color='#dde7e9',dash=''){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+color+'" '+(dash?'stroke-dasharray="'+dash+'"':'')+'/>';}
+function renderComparison(a,b){const warnings=[];const ok=compatible(a,b);if(!ok)warnings.push('These samples have different matrices or incompatible units. Overlay and similarity are disabled; choose two samples of the same type.');
+  const ca=a?sampleSummary(a):null,cb=b?sampleSummary(b):null;
+  if(ok&&(ca.miss||cb.miss))warnings.push('Missing analytes: normalized profile, similarity and PCA require all 16 observations. The plotted concentrations retain gaps.');
+  if(ok&&state.mode==='relative'&&cb&&cb.complete&&!normalized(b))warnings.push('Sample B has a zero estimated Σ16 at the current LOQ setting, so its relative profile is unavailable. Increase the LOQ fraction or switch to concentration view.');
+  if(ok&&(ca.blq+cb.blq)>=8)warnings.push('Many below-LOQ results: profile shape is sensitive to the LOQ substitution setting.');
+  const warning=$('compareWarning');warning.hidden=warnings.length===0;warning.textContent=warnings.join(' ');
+  if(!a||!b){$('profileChart').innerHTML='<div class="empty">Import two samples to compare.</div>';return;}
+  const plotA=state.mode==='relative'?normalized(a):KEYS.map(k=>sampleValue(a,k));const plotB=ok?(state.mode==='relative'?normalized(b):KEYS.map(k=>sampleValue(b,k))):null;
+  if(!plotA){$('profileChart').innerHTML='<div class="empty">This sample has missing analytes or a zero estimated sum. Relative fingerprint cannot be calculated. Try concentration view or another sample.</div>';$('plotHint').textContent='No relative comparison available.';return;}
+  const yValues=[...plotA,...(plotB||[])].filter(x=>x!==null&&Number.isFinite(x));let max=Math.max(...yValues,0);
+  if(max<=0)max=1;if(state.mode==='relative')max=Math.ceil((max*100)*1.15/5)*5||5;else max=Math.ceil(max*1.2*10)/10||1;
+  const W=970,H=350,L=58,R=22,T=18,B=75,x=i=>L+i*(W-L-R)/(KEYS.length-1),y=value=>T+(H-T-B)*(1-value/max),view=state.mode==='relative';
+  let svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="PAH fingerprint line comparison, '+(view?'relative percent':'concentration')+'"><title>PAH profile · A '+esc(a.id)+(ok?' versus B '+esc(b.id):'')+'</title>';
+  for(let i=0;i<=5;i++){const value=max*i/5,yy=y(value);svg+=svgLine(L,yy,W-R,yy,i===0?'#9fadb2':'#e5ecef')+'<text x="'+(L-9)+'" y="'+(yy+4)+'" text-anchor="end" fill="#7b8b91" font-size="12">'+esc(fmt(value,view?1:2))+'</text>';}
+  svg+='<text x="'+(L+1)+'" y="12" fill="#667f88" font-size="11">'+esc(view?'Share of Σ16 (%)':a.unit)+'</text>';
+  for(let i=0;i<KEYS.length;i++){const xx=x(i);svg+=svgLine(xx,H-B,xx,H-B+5,'#b0c0c5')+'<text x="'+xx+'" y="'+(H-B+20)+'" text-anchor="end" transform="rotate(-50 '+xx+' '+(H-B+20)+')" fill="#657b85" font-size="11">'+KEYS[i]+'</text>';}
+  function plot(sample,data,color){if(!data)return;const vals=data.map(v=>v===null?null:view?v*100:v);let segment=[];
+    function finish(){if(segment.length>1)svg+='<polyline fill="none" stroke="'+color+'" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="'+segment.join(' ')+'"/>';segment=[];}
+    vals.forEach((v,i)=>{if(v===null||!Number.isFinite(v)){finish();return;}segment.push(x(i)+','+y(v));});finish();
+    vals.forEach((v,i)=>{if(v===null||!Number.isFinite(v))return;const record=sample.vals[KEYS[i]],isC=record.kind==='censored';svg+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(isC?5:4)+'" fill="'+(isC?'#fff':color)+'" stroke="'+color+'" stroke-width="2"><title>'+esc(sample.id)+' · '+esc(KEYS[i])+': '+esc(fmt(v,3))+(view?'%':' '+sample.unit)+(isC?' (censored, visualization estimate)':'')+'</title></circle>';});
+  }
+  plot(a,plotA,'#167b78');if(ok&&b)plot(b,plotB,'#df7b49');svg+='</svg>';$('profileChart').innerHTML=svg;
+  $('plotHint').textContent=view?'Relative share of each PAH in the 16-compound sum, using '+fmt(state.factor,1)+' × LOQ for censored values. Not source probabilities.':'Canonical concentrations. Wipe results are displayed in µg/m², including conversion from µg/100cm². A and B are overlaid only when units and matrices are compatible.';
+}
+function sumText(summary){if(!summary)return '—';if(summary.miss)return '≥ '+fmt(summary.low,2);return summary.blq?fmt(summary.low,2)+'–'+fmt(summary.high,2):fmt(summary.low,2);}
+function renderSummary(a,b){const sa=a?sampleSummary(a):null,sb=b?sampleSummary(b):null,ok=compatible(a,b);
+  $('sumA').textContent=sumText(sa);$('sumB').textContent=sumText(sb);
+  $('sumAFoot').textContent=(a?.unit||'')+(sa?.miss?' · upper bound unknown':'')+' · '+(sa?.blq||0)+' <LOQ';
+  $('sumBFoot').textContent=(b?.unit||'')+(sb?.miss?' · upper bound unknown':'')+' · '+(sb?.blq||0)+' <LOQ';
+  const sim=ok?cosine(normalized(a),normalized(b)):null;$('simValue').textContent=sim===null?'—':fmt(sim,3);
+  $('compValue').textContent=ok?'Yes':'No';$('compValue').style.color=ok?'#167b78':'#a65443';
+  $('compFoot').textContent=ok?'Same matrix and canonical unit; check sampling protocol too':'Different sample matrix/unit';
+  $('sumNote').textContent='Totals are analytical bounds (measured sum to measured + sum of LOQs), not confidence intervals. '+((sa?.miss||sb?.miss)?'At least one sample has missing analytes, so its full upper bound is unknown. ':'')+(sim===null?'Similarity is unavailable for this pair.':'Cosine similarity describes the shapes after normalization, not the probability of a common origin.');
+}
+function ratioCell(sample,a,b){const r=ratioBounds(sample,a,b);if(!r)return '<span class="muted">—</span>';
+  if(r.censored)return '<span class="ratio-val">'+fmt(r.low,3)+'–'+fmt(r.high,3)+'</span><span class="ratio-sub">LOQ-bounded</span>';
+  return '<span class="ratio-val">'+fmt(r.low,3)+'</span>';
+}
+function renderRatios(a,b){$('ratioBody').innerHTML=RATIOS.map(([label,x,y])=>'<tr><td><strong>'+label+'</strong></td><td>'+ratioCell(a,x,y)+'</td><td>'+ratioCell(b,x,y)+'</td></tr>').join('');}
+function cellText(sample,k){if(!sample)return '—';const v=sample.vals[k];return v.kind==='measured'?fmt(v.value,3):v.kind==='censored'?'&lt;'+fmt(v.loq,3):'—';}
+function renderTable(a,b){$('tableUnit').textContent='Concentrations in '+(compatible(a,b)?(a?.unit||'canonical units'):'each sample’s own canonical unit')+'. “<” indicates a reported quantification limit.';
+  $('analyteBody').innerHTML=PAHS.map(([k,name,rings])=>'<tr><td>'+esc(name)+'<span class="muted"> · '+rings+' rings</span></td><td>'+k+'</td><td>'+cellText(a,k)+'</td><td>'+cellText(b,k)+'</td></tr>').join('');}
+function topEigen(cov,prev=[]){const n=cov.length;let v=Array.from({length:n},(_,i)=>Math.sin(i*1.79+1)+.7*Math.cos(i*2.11+1.7));
+  function orth(a){for(const p of prev){const dot=vecDot(a,p);a=a.map((val,i)=>val-dot*p[i]);}return a;}
+  v=orth(v);let mag=Math.hypot(...v);if(mag<1e-14)return null;v=v.map(t=>t/mag);
+  for(let iter=0;iter<240;iter++){let next=orth(cov.map(row=>vecDot(row,v)));mag=Math.hypot(...next);if(mag<1e-12)break;next=next.map(z=>z/mag);let diff=Math.min(Math.hypot(...next.map((x,i)=>x-v[i])),Math.hypot(...next.map((x,i)=>x+v[i])));v=next;if(diff<1e-11)break;}
+  const lambda=vecDot(v,cov.map(row=>vecDot(row,v)));return lambda>1e-12?{v,lambda}:null;
+}
+function pca(samples){const n=samples.length;if(n<3)return null;const vectors=samples.map(normalized);if(vectors.some(v=>!v))return null;
+  const d=KEYS.length,mean=Array.from({length:d},(_,j)=>vectors.reduce((s,v)=>s+v[j],0)/n),centered=vectors.map(v=>v.map((z,j)=>z-mean[j]));
+  const cov=Array.from({length:d},(_,i)=>Array.from({length:d},(_,j)=>centered.reduce((s,v)=>s+v[i]*v[j],0)/(n-1)));
+  const tr=cov.reduce((s,row,i)=>s+row[i],0);if(tr<1e-14)return null;
+  const e1=topEigen(cov);if(!e1)return null;const def=cov.map((row,i)=>row.map((c,j)=>c-e1.lambda*e1.v[i]*e1.v[j]));const e2=topEigen(def,[e1.v]);
+  const result=centered.map((v,i)=>({sample:samples[i],x:vecDot(v,e1.v),y:e2?vecDot(v,e2.v):0}));
+  return {result,variance1:100*e1.lambda/tr,variance2:e2?100*e2.lambda/tr:0};
+}
+function renderPCA(a){const warning=$('pcaWarning');warning.hidden=true;if(!a){$('pcaChart').innerHTML='<div class="empty">No samples</div>';return;}
+  const subset=state.rows.filter(s=>s.sample_type===a.sample_type&&normalized(s));const nMissing=state.rows.filter(s=>s.sample_type===a.sample_type&&!normalized(s)).length;
+  if(subset.length<3){$('pcaChart').innerHTML='<div class="empty">Need at least 3 complete profiles of the same matrix for PCA.</div>';$('pcaLegend').innerHTML='';$('pcaNote').textContent='Only '+subset.length+' eligible samples in this matrix.';return;}
+  const data=pca(subset);if(!data){$('pcaChart').innerHTML='<div class="empty">All normalized profiles are too similar or have no variation.</div>';return;}
+  const groups=[...new Set(subset.map(s=>s.group))];const colorFor=g=>COLORS[groups.indexOf(g)%COLORS.length];
+  const W=610,H=365,L=58,R=24,T=24,B=55;
+  let xs=data.result.map(d=>d.x),ys=data.result.map(d=>d.y),minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  if(maxX-minX<1e-10){minX-=1;maxX+=1;}if(maxY-minY<1e-10){minY-=1;maxY+=1;}
+  const dx=(maxX-minX)*.13,dy=(maxY-minY)*.13;minX-=dx;maxX+=dx;minY-=dy;maxY+=dy;
+  const sx=x=>L+(x-minX)/(maxX-minX)*(W-L-R),sy=y=>H-B-(y-minY)/(maxY-minY)*(H-T-B);
+  let svg='<svg viewBox="0 0 '+W+' '+H+'" class="pca-svg" role="img" aria-label="PCA scatterplot"><title>PCA of normalized full PAH profiles</title>';
+  for(let i=0;i<=4;i++){const xx=L+i*(W-L-R)/4,yy=T+i*(H-T-B)/4;svg+=svgLine(xx,T,xx,H-B,'#edf2f3')+svgLine(L,yy,W-R,yy,'#edf2f3');}
+  svg+=svgLine(L,H-B,W-R,H-B,'#a7b8bc')+svgLine(L,T,L,H-B,'#a7b8bc')+'<text x="'+((L+W-R)/2)+'" y="'+(H-11)+'" fill="#647c83" text-anchor="middle" font-size="12">PC 1 · '+fmt(data.variance1,1)+'% variance</text><text x="16" y="'+(T+(H-B-T)/2)+'" fill="#647c83" text-anchor="middle" transform="rotate(-90 16 '+(T+(H-B-T)/2)+')" font-size="12">PC 2 · '+fmt(data.variance2,1)+'%</text>';
+  data.result.forEach(point=>{const s=point.sample,selected=s.id===state.a||s.id===state.b;
+    svg+='<circle tabindex="0" role="button" aria-label="Select '+esc(s.id)+' as sample B" data-pca="'+esc(s.id)+'" cx="'+sx(point.x)+'" cy="'+sy(point.y)+'" r="'+(selected?8:6)+'" fill="'+colorFor(s.group)+'" stroke="'+(selected?'#162b36':'white')+'" stroke-width="'+(selected?2.3:1.5)+'" style="cursor:pointer"><title>'+esc(s.id+' · '+s.group)+' · select as Sample B</title></circle>';
+    if(selected)svg+='<text x="'+(sx(point.x)+10)+'" y="'+(sy(point.y)-11)+'" font-size="11" fill="#293f48">'+esc(s.id)+'</text>';
+  });svg+='</svg>';$('pcaChart').innerHTML=svg;
+  $('pcaChart').querySelectorAll('[data-pca]').forEach(node=>{function select(){state.b=node.getAttribute('data-pca');render();}node.addEventListener('click',select);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});});
+  $('pcaLegend').innerHTML=groups.map(g=>'<div class="key-row"><i class="key-color" style="background:'+colorFor(g)+'"></i><span>'+esc(g)+'</span></div>').join('');
+  $('pcaNote').textContent=subset.length+' full '+a.sample_type+' profiles · '+nMissing+' omitted (missing/zero sum). '+fmt(state.factor,1)+' × LOQ used. Click any dot to compare it against Sample A.';
+  const maxCens=subset.reduce((v,s)=>Math.max(v,sampleSummary(s).blq),0);if(maxCens>3){warning.hidden=false;warning.textContent='PCA may be highly sensitive to the chosen fraction of LOQ because some profiles have '+maxCens+' censored analytes.';}
+}
+function start(){freshDataset(demoRows(),'Synthetic demonstration');
+  $('sampleA').addEventListener('change',e=>{state.a=e.target.value;render();});$('sampleB').addEventListener('change',e=>{state.b=e.target.value;render();});
+  $('loqSlider').addEventListener('input',e=>{state.factor=Number(e.target.value)/100;render();});
+  $('modeRelative').addEventListener('click',()=>{state.mode='relative';render();});$('modeAbsolute').addEventListener('click',()=>{state.mode='absolute';render();});
+  $('demoBtn').addEventListener('click',()=>{freshDataset(demoRows(),'Synthetic demonstration');showNotice('Restored 15 synthetic demonstration samples. No real source-reference signatures are implied.','ok');});
+  $('templateBtn').addEventListener('click',()=>{const example={sample_id:'SAMPLE-001',group:'Example fire context',sample_type:'wipe',unit:'µg/m²',site:'Example area',notes:'Enter values for all 16 compounds'};for(const k of KEYS)example[k]='';download('PAH_Fingerprint_Import_Template.csv',csvRows([example]));});
+  $('exampleBtn').addEventListener('click',()=>download('PAH_Fingerprint_Synthetic_Examples.csv',csvRows(demoRows().map(s=>s.raw))));
+  $('printBtn').addEventListener('click',()=>window.print());
+  $('csvFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;
+    if(file.size>2*1024*1024){showNotice('File is larger than 2 MB. Import canceled.','bad');e.target.value='';return;}
+    try{const txt=await file.text();const result=parseCSV(txt);if(result.valid.length===0){showNotice('No valid samples were found. Current dataset remains unchanged.','bad',result.errors);}
+      else{freshDataset(result.valid,file.name);showNotice('Imported '+result.valid.length+' of '+result.total+' rows from '+file.name+(result.errors.length?' · invalid rows were skipped.':' · all rows passed structural validation.'),result.errors.length?'bad':'ok',result.errors);}
+    }catch(err){showNotice('Import failed: '+err.message+'. Current dataset remains unchanged.','bad');}finally{e.target.value='';}
+  });
+}
+start();
+})();
+</script>
+</body>
+</html>
