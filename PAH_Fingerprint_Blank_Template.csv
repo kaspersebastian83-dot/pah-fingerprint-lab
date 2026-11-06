@@ -1,0 +1,2 @@
+sample_id,group,sample_type,unit,site,notes,NAP,ACY,ACE,FLU,PHE,ANT,FLT,PYR,BAA,CHR,BBF,BKF,BAP,DBA,ICP,BGP
+SAMPLE-001,Example fire context,wipe,µg/m²,Example area,Enter values for all 16 compounds,,,,,,,,,,,,,,,,
